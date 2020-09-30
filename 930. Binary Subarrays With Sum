@@ -1,0 +1,47 @@
+class Solution {
+public:
+    int numSubarraysWithSum(vector<int>& A, int S) {
+    int n = A.size();
+        if(S==0) return helper(A, n);
+        int lo=0, hi=0, prev =-1, count=0, sum =0;
+        while(hi<n && A[hi]!=1)
+            lo++, hi++;
+        
+        while(hi<n)
+        {
+            if(sum +A[hi]==S)
+            {
+                count+=lo -prev;
+                sum+=A[hi];
+                hi++;
+            }
+            else
+                if(sum+A[hi]>S)
+                {
+                    sum-=A[lo];
+                    prev =lo;
+                    lo++;
+                    while(A[lo]!=1)lo++;
+                }
+            else
+            {
+                sum += A[hi];
+                hi++;
+            }
+        }
+        return count;
+            
+    }
+    int helper(vector<int> A,int n)
+    {
+        int count =0, ans=0;
+        for(int i=0;i<n;i++)
+        {
+            if(A[i]==0)
+                count++, ans+=count;
+            else
+                count=0;
+        }
+        return ans;
+    }
+};
