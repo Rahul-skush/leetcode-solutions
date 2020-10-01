@@ -1,0 +1,40 @@
+class Solution {
+public:
+    
+    ListNode* helper(ListNode* head1, int x)
+    {
+        ListNode* head = head1;
+        if(!head) return head;
+        
+        ListNode *left=NULL, *right =NULL, *first =NULL, *second=NULL;
+       while(head)
+       {
+           ListNode *new1 = new ListNode(head->val);
+           if(head->val<x)
+               {
+               if(!left) left =new1;
+               else
+                  { left->next=new1;
+               left = left->next;}
+           if(!first) first = new1;}
+           else
+               {if(!right) right =new1;
+               else
+                   {right->next=new1;
+                right =right->next;}
+           if(!second) second = new1;}
+           head = head->next;
+           
+       }
+        if(!left)
+            return second;
+        if(second)
+        left->next = second;
+        
+        return first;
+    }
+    
+    ListNode* partition(ListNode* head, int x) {
+       return  helper(head, x);
+    }
+};
