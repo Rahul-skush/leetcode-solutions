@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D) {
+        int count =0;
+       map<int, int> mp;
+        for(int i : A)
+            for(int j: B)
+                mp[i+j]++;
+        
+                for(int i : C)
+                    for(int j : D)
+                        count += mp[-i-j];
+                 
+        return count;
+    }
+};
