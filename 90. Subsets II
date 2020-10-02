@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+       vector<int> subset;
+        vector<vector<int>> res;
+        sort(nums.begin(), nums.end());
+        subsetUtil(subset, res, nums, 0);
+        return vector<vector<int>> (res.begin(), res.end());
+    }
+    
+   void subsetUtil(vector<int> &subset, vector<vector<int>> &res, vector<int> nums, int index)
+    {
+        res.push_back(subset);
+        for(int i=index ;i<nums.size();i++)
+        {
+            if(i==index|| nums[i]!=nums[i-1])
+            {subset.push_back(nums[i]);
+            subsetUtil(subset, res, nums, i+1);
+            subset.pop_back();}
+        }
+       return ;
+    }
+};
