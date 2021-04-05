@@ -1,0 +1,45 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int a[]=new int[n];
+		for(int i=0;i<n;i++)
+		a[i]=sc.nextInt();
+		
+		int ans=0;
+		int sum_val=a[0];int cc=1;int i=1;
+		while(i<n){
+		    int j=i;
+		    if(cc%2==1){
+		        while(j<n&&sum_val+a[j]>=sum_val){
+		            sum_val+=a[j];
+		            j++;
+		        }
+		        
+		    }
+		    if(cc%2==0){
+		        while(j<n&&sum_val+a[j]<=sum_val){
+		            sum_val+=a[j];j++;
+		        }
+		       
+		    }
+		    i=j+1;
+		    ans+=(int)Math.pow(-1,cc+1)*sum_val;
+		    System.out.println(sum_val);
+		    cc++;
+		    if(i<n)
+		    sum_val=a[i];
+		}
+		System.out.println(ans);
+	}
+}
