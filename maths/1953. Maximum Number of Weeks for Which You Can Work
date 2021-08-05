@@ -1,0 +1,16 @@
+class Solution {
+public:
+    long long numberOfWeeks(vector<int>& milestones) {
+        long long sum = 0, mx = 0;
+        for(auto x : milestones)
+        {
+            sum += x;
+            mx = max((long long)x, mx);
+        }
+        
+        long long sumExceptMx = sum - mx;
+        if(mx>sumExceptMx+1)
+            return sumExceptMx*2 + 1;
+        return sum;
+    }
+};
