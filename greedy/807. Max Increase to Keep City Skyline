@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int maxIncreaseKeepingSkyline(vector<vector<int>>& grid) {
+      int n = grid.size();
+        vector<int> rw(n, 0), cl(n, 0);
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+                {rw[i] = max(rw[i], grid[i][j]);
+                 cl[j]= max(cl[j], grid[i][j]);}
+        }
+        int ans =0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+               {
+                 ans += grid[i][j]  - min(cl[j], rw[i]);
+                grid[i][j] = min(cl[j], rw[i]);
+                cout<<grid[i][j]<<" ";
+               }
+            cout<<endl;
+        }
+        return -ans;
+    }
+};
