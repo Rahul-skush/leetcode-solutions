@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<int> countSubTrees(int n, vector<vector<int>>& edges, string labels) {
+       vector<int> ans(n, 0);
+        vector<int> adj[n];
+        for(auto x : edges)
+            {
+             adj[x[0]].push_back(x[1]);
+             adj[x[1]].push_back(x[0]);
+            }
+        vector<bool> vis(n, 0);
+        dfs(0, adj, vis, labels, ans);
+        
+        return ans;
+    }
+    
+    vector<int> dfs(int s, vector<int> adj[], vector<bool> &vis, string &lbl,                                        vector<int>&ans)
+    {
+        vis[s] = 1;
+        vector<int> v(26, 0);
+        for(auto x : adj[s])
+        {
+            if(!vis[x])
+            {
+                vector<int> tmp = dfs(x, adj, vis, lbl, ans);
+                for(int i=0;i<26;i++)
+                    v[i] += tmp[i];
+            }
+        }
+        v[lbl[s]-'a']++;
+        ans[s] = v[lbl[s]-'a'];
+        return v;
+    }
+};
