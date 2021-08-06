@@ -1,0 +1,44 @@
+class Solution {
+public:
+    set<int> st;
+    int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
+        
+        vector<int> adj[n];
+        for(auto x : edges)
+           { adj[x[1]].push_back(x[0]);
+            adj[x[0]].push_back(x[1]);}
+        vector<bool> vis(n, 0);
+       
+            vector<int> v;
+            v.push_back(0);
+                dfs(0, vis, adj, v, hasApple);
+        
+        if(st.size()==0) return 0;
+        return (st.size()-1)*2;
+    }
+    
+    void dfs(int s, vector<bool> &vis, vector<int> adj[], vector<int> v,
+             vector<bool>& hasApple)
+    {
+        if(hasApple[s])
+        {
+            vis[s] =1;
+            for(int i=v.size()-1;i>=0;i--)
+                { cout<<v[i]<<" "; 
+                if(st.count(v[i])) break;
+                st.insert(v[i]);
+                }
+            cout<<endl;
+        }
+        vis[s] = 1;
+        for(auto x : adj[s])
+        {
+            if(vis[x]==false)
+            {
+                v.push_back(x);
+                dfs(x, vis, adj, v, hasApple);
+                v.pop_back();
+            }
+        }
+    }
+};
