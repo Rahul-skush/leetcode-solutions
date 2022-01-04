@@ -7,7 +7,6 @@ class Solution {
   public:
     bool canPair(vector<int> nums, int k) {
         // Code here.
-        if(k==1) return nums.size()%2==0;
         unordered_map<int, int> mp;
         for(auto x : nums)
         mp[x%k]++;
