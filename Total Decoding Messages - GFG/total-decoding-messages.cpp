@@ -6,7 +6,7 @@ using namespace std;
 class Solution {
 	public:
 	int mod =1e9+7;
-	map<int, long long> mp;
+	unordered_map<int, long long> mp;
 		int CountWays(string str){
 		    // Code here
 		    if(str[0]=='0') return 0;
