@@ -19,7 +19,6 @@ public:
                 string str, sp, no;
                 while(!st.empty() && st.top()!="[")
                     {str+= st.top(); st.pop();}
-                    //reverse(str.begin(), str.end());
                     st.pop();
                     while(!st.empty() && st.top()>="0" && st.top()<="9")
                     {no+=st.top(); st.pop();}
@@ -37,9 +36,9 @@ public:
                 st.push(str);
             }
         }
-         s = st.top();
-        reverse(s.begin(), s.end());
-        return s;
+        string ans = st.top();
+        reverse(ans.begin(), ans.end());
+        return ans;
     }
 };
 
