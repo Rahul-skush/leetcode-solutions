@@ -10,48 +10,41 @@ using namespace std;
 class Solution{
 public:
     int isValid(vector<vector<int>> mat){
-        int n = mat[0].size();
-    for (int i = 0; i < n; i++)
-    {
-        vector<int> colm(9, 0);
-        vector<int> row(9, 0);
-        for (int j = 0; j < n; j++)
+        // code here
+        int n = 9;
+        for(int i=0;i<n;i++)
         {
-            if (mat[i][j] != 0)
+            vector<int> v1(9, 0), v2(9, 0);
+            for(int j=0;j<n;j++)
             {
-                if (colm[mat[i][j] - 1] == 0)
-                    colm[mat[i][j] - 1] += 1;
-                else
-                    return 0;
-            }
-            if (mat[j][i] != 0)
-            {
-                if (row[mat[j][i] - 1] == 0)
-                    row[mat[j][i] - 1] += 1;
-                else
-                    return 0;
-            }
-            if (i % 3 == 0 && j % 3 == 0)
-            {
-                vector<int> box(9, 0);
-                for (int k = i; k < (i + 3); k++)
+                if(mat[i][j]!=0)
+                {v1[mat[i][j]-1]++; 
+                if(v1[mat[i][j]-1]>1) return 0;}
+                if(mat[j][i]!=0)
+                {v2[mat[j][i]-1]++;
+                if(v2[mat[j][i]-1]>1) return 0;}
+                
+                if(i%3==0 && j%3==0)
                 {
-                    for (int l = j; l < (j + 3); l++)
+                    vector<int> v3(9, 0);
+                    for(int k=i;k<i+3;k++)
                     {
-                        if (mat[k][l] != 0)
+                        for(int l=j;l<j+3;l++)
                         {
-                            if (box[mat[k][l] - 1] == 0)
-                                box[mat[k][l] - 1] += 1;
-                            else
-                                return 0;
+                            if(mat[k][l]!=0)
+                            {v3[mat[k][l]-1]++;
+                            if(v3[mat[k][l]-1]>1) return 0;}
                         }
                     }
                 }
             }
         }
-    }
-
-    return 1;
+        
+       
+        
+        
+        
+        return 1;
     }
 };
 
