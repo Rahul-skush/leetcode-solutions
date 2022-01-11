@@ -12,31 +12,17 @@
 class Solution {
 public:
     int sumRootToLeaf(TreeNode* root) {
-        return find(root, "");
+        return find(root, 0);
     }
     
-    int find(TreeNode* root, string s)
+    int find(TreeNode* root, int val)
     {
         if(!root) return 0;
-        s+= '0' + root->val ;
-        if(!root->left && !root->right) return convertdec(s);
+        val = val*2 + root->val;
+        if(!root->left && !root->right) return val;
         
-        return (root->left?find(root->left, s):0) + 
-               (root->right?find(root->right, s):0);
+        return (root->left?find(root->left, val):0) + 
+               (root->right?find(root->right, val):0);
     }
     
-    int convertdec(string s)
-    {
-        //cout<<s<<" ";
-        int i=s.size()-1, j=0;
-        int ans =0;
-        while(i>=0)
-        {
-            ans += (s[i]=='1')?1<<j:0;
-            i--;
-            j++;
-        }
-        //cout<<ans<<endl;
-        return ans;
-    }
 };
