@@ -9,7 +9,8 @@ public:
                 {
                   int  cnt = j-i-1 -2;
                     if(cnt>0)
-                       ans += (cnt/2) + cnt%2; 
+                       ans += (cnt/2) + cnt%2;
+                    if(ans>=n) return 1;
                     i=j;
                 }
               j++;
@@ -18,7 +19,6 @@ public:
                     if(cnt>0)
                        ans += (cnt/2) + cnt%2; 
         
-        //cout<<ans<<"\n";
         return ans>=n;
     }
 };
