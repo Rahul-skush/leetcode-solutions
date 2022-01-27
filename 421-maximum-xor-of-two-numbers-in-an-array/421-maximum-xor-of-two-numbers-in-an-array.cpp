@@ -9,7 +9,7 @@ public:
         for(int i=31;i>=0;i--)
         {
             mask = mask | 1<<i;
-            set<int>st;
+            unordered_set<int>st;
             for(auto x : nums)
             {
                     st.insert(x&mask);
