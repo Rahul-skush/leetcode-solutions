@@ -1,22 +1,16 @@
 class Solution {
 public:
-    int n ;
     int deleteAndEarn(vector<int>& nums) {
-        int n = 10001;
-        vector<int> values(n, 0);
-        for (int num : nums)
-            values[num] += num;
-
-        int take = 0, skip = 0;
-        for (int i = 0; i < n; i++) {
-            int takei = skip + values[i];
-            int skipi = max(skip, take);
-            take = takei;
-            skip = skipi;
+        vector<int> dp(10002, 0);
+        unordered_map<int, int> mp;
+        for(auto x : nums)
+            mp[x]++;
+        
+        for(int i=1;i<10002;i++)
+        {
+            dp[i] = max(dp[i-1], (i-2>=0?dp[i-2]:0) + mp[i]*i);
         }
         
-       return max(take, skip);
+        return  dp[10001];
     }
-    
-   
 };
