@@ -1,23 +1,25 @@
 class Solution {
 public:
     string simplifyPath(string path) {
-        vector<string> st;
-        stringstream ss(path);
-        string tmp;
-        while(getline(ss, tmp, '/'))
+        vector<string> v;
+        int i=0, n = path.size();
+        while(i<n)
         {
-            if(tmp=="" || tmp==".") continue;
-            else if(tmp==".." && !st.empty()) st.pop_back();
-            else if(tmp!="..") st.push_back(tmp);
+            string str;
+            while(i<n && path[i]!='/')
+                str += path[i++];
+            if(str==".." && v.size()) v.pop_back();
+            else if(str!="." && str!=".." && str.size()) v.push_back(str);
+          
+            i++;
         }
         
-        string s;
-        for(int i=0;i<st.size();i++)
-        {
-             s += "/";
-            s += st[i];
-        }
-        if(s.size()==0) return "/";
-        return s;
+        string ans;
+        for(auto x : v)
+            {
+            ans +="/";
+            ans += x;
+            }
+        return ans.size()?ans:"/";
     }
 };
