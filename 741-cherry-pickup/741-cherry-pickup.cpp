@@ -1,7 +1,7 @@
 class Solution {
 public:
     int n, m;
-    int dp[60][60][60][60];
+    int dp[51][51][51][51];
     int cherryPickup(vector<vector<int>>& grid) {
       n  = grid.size(), m = grid[0].size();
         memset(dp, -1, sizeof(dp));
