@@ -1,50 +1,34 @@
 class Solution {
 public:
+    int dp[1002][52];
     int splitArray(vector<int>& nums, int m) {
-        int l = 0,  h =1e9;
-        while(l<h)
-        {
-            int mid = l + (h-l)/2;
-            int x = check(nums, m, mid);
-            if(x!=-1 && x!=1) return x;
-            if(x==-1)
-                l=mid+1;
-            else h = mid;
-        }
-        
-        int sum =0, ans=0, f=0;
-        for(int i=0; i<nums.size();i++)
-        {
-            sum += nums[i];
-            if(sum>l-1) { f++;  sum=nums[i];}
-            else if(i<nums.size()-1 && sum==l-1){f++; sum =0;}
-        }
-        //cout<<l<<" "<<f<<endl;
-        if(f==m-1 && sum<l) return l-1;
-        sum =0, ans=0;
-        for(int i=0; i<nums.size();i++)
-        {
-            sum += nums[i];
-            if(sum>l) {ans = max(ans, sum-nums[i]);  sum=nums[i];}
-            else if(sum==l){ ans = max(ans, l); sum =0;}
-        }
-        return ans;
+        return binSearch(nums, m);
     }
     
-    int check(vector<int>&nums, int m, int mid)
+    int binSearch(vector<int> &nums, int m)
     {
-        m-=1;
-        int sum =0, mx=0;
-        for(int i=0; i<nums.size();i++)
+        int l = 0,  h = 1e9+1;
+        
+        while(l<h)
         {
-            sum += nums[i];
-            if(sum>mid) {m--;  sum=nums[i];}
-            else if(sum==mid){m--;  sum =0;}
+            int mid = l+(h-l)/2;
+            if(mreduce(nums, m, mid)==0) l = mid+1;
+            else h = mid;
         }
-        if(sum>mid) m--;
-       // cout<<mid<<" "<<m<<endl;
-        if(m<0) return -1;
-        else return 1;
-            
+        return l;
+    }
+    
+    int  mreduce(vector<int> &nums, int m, int mid)
+    {
+        int f =0;
+        int sum =0;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]>mid) return 0;
+            if(sum + nums[i]<=mid) {sum += nums[i];}
+            else {f++; sum =nums[i];}
+        }
+        f++;
+        return f<=m;
     }
 };
