@@ -1,8 +1,8 @@
 class UndergroundSystem {
 public:
-    map<int, pair<string, int>> chkinmp;
-    map<pair<string, string>, double> mp;
-    map<pair<string, string>, int> mp2;
+    unordered_map<int, pair<string, int>> chkinmp;
+    unordered_map<string, double> mp;
+    unordered_map<string, int> mp2;
     UndergroundSystem() {
         
     }
@@ -12,12 +12,12 @@ public:
     }
     
     void checkOut(int id, string stationName, int t) {
-        mp[{chkinmp[id].first, stationName}] += t - chkinmp[id].second;
-        mp2[{chkinmp[id].first, stationName}]++;
+        mp[chkinmp[id].first + '$' + stationName] += t - chkinmp[id].second;
+        mp2[chkinmp[id].first + '$' + stationName]++;
     }
     
     double getAverageTime(string startStation, string endStation) {
-        return mp[{startStation, endStation}]/mp2[{startStation, endStation}];
+        return mp[startStation + '$' + endStation]/mp2[startStation + '$' + endStation];
     }
 };
 
