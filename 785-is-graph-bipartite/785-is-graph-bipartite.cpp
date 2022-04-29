@@ -1,7 +1,8 @@
 class Solution {
 public:
     bool isBipartite(vector<vector<int>>& graph) {
-        vector<int> adj[102];
+        int m = graph.size();
+        vector<int> adj[m];
         for(int j=0;j<graph.size();j++)
         {
             for(int i=0;i<graph[j].size();i++){
@@ -10,9 +11,9 @@ public:
            
         }
         
-        vector<int> vis(102, -1);
+        vector<int> vis(m+1, -1);
         
-        for(int i=0;i<101;i++)
+        for(int i=0;i<m;i++)
         {
             if(vis[i]!=-1) continue;
             
