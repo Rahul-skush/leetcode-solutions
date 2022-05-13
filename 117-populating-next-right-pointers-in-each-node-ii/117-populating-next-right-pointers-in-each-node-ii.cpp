@@ -19,31 +19,38 @@ public:
 class Solution {
 public:
     Node* connect(Node* root) {
-        find(root);
+        Node * curr = root, *prv = NULL, *head = NULL;
+        while(curr)
+        {
+            while(curr)
+            {
+                if(curr->left)
+                {
+                    if(prv)
+                    {
+                    prv->next = curr->left;
+                    }
+                    else head = curr->left;
+                    prv = curr->left;
+                }
+                
+                if(curr->right)
+                {
+                    if(prv)
+                    {
+                    prv->next = curr->right;
+                    }
+                    else head = curr->right;
+                    prv = curr->right;
+                }
+                
+                curr = curr->next;
+            }
+            
+            curr = head;
+            head = NULL;
+            prv = NULL;
+        }
         return root;
-    }
-    
-   void find(Node * root)
-    {
-        if(!root) return ;
-       
-       if(root->left)
-       {
-           root->left->next = root->right?root->right:findNext(root->next);
-       }
-       if(root->right)
-           root->right->next = findNext(root->next);
-       
-       find(root->right);
-       find(root->left);
-    }
-    
-    Node *findNext(Node *root)
-    {
-        if(!root) return NULL;
-        if(root->left) return root->left;
-        if(root->right) return root->right;
-        
-        return findNext(root->next);
     }
 };
