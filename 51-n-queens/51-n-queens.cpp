@@ -27,12 +27,10 @@ public:
         }
     }
     
-    bool check(int x, int y, vector<string> v)
+    bool check(int x, int y, vector<string> &v)
     {
         for(int i=0;i<m;i++)
-            if(i!=x && v[i][y]=='Q') return 0;
-        for(int i=0;i<m;i++)
-            if(i!=y && v[x][i]=='Q') return 0;
+            if((i!=x && v[i][y]=='Q')|| (i!=y && v[x][i]=='Q')) return 0;
         
         int i = x, j = y;
         while(i>=0 && j>=0)
