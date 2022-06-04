@@ -14,7 +14,7 @@ public:
         return res;
     }
     
-    void find(int i, vector<string> v)
+    void find(int i, vector<string> &v)
     {
         if(i>=v.size()) {res.push_back(v); return ;}
         
