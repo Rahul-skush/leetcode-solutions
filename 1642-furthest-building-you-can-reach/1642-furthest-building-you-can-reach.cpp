@@ -16,8 +16,8 @@ public:
                             pq.pop();
                             bricks -= diff;
                             pq.push(diff);
-                            ladders--;
-                        }else ladders--; 
+                        }
+                     ladders--; 
                     }
                 else return i-1;
             }
