@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    unordered_map<int, TreeNode*> mp;
+    int prv =-1;
     vector<int> v;
     vector<int> rightSideView(TreeNode* root) {
         find(root, 0);
@@ -21,8 +21,8 @@ public:
     void find(TreeNode * root, int level)
     {
         if(!root) return ;
-        if(mp.find(level)==mp.end()){
-            mp[level] = root;
+        if(prv<level){
+            prv = level;
             v.push_back(root->val);
         }
         
