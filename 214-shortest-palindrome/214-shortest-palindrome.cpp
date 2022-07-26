@@ -1,26 +1,21 @@
 class Solution {
 public:
     string shortestPalindrome(string s) {
-        string str = s;
+       string str =s;
         reverse(str.begin(), str.end());
-        str = s + '$' + str;
+        str = s + "$" + str;
         int n = str.size();
-        vector<int> lps(n);
-        int i =1;
-        while(i<str.size())
+        vector<int> LPS(str.size(), 0);
+        for(int i=1;i<str.size();i++)
         {
-            int j = lps[i-1];
+            int j = LPS[i-1];
             while(j>0 && str[j]!=str[i])
-                j = lps[j-1];
+                j = LPS[j-1];
             if(str[j]==str[i])
-                lps[i] = j+1;
-            i++;
+                LPS[i] = j+1;
         }
-        
-        str = s.substr(lps[n-1]);
+        str = s.substr(LPS[n-1]);
         reverse(str.begin(), str.end());
-        str = str + s;
-        return str;
-        
+        return str + s;
     }
 };
