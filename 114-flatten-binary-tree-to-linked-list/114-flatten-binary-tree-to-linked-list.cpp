@@ -13,20 +13,23 @@ class Solution {
 public:
     TreeNode *prev = NULL;
     void flatten(TreeNode* root) {
-        find(root);
+      while(root)
+      {
+          if(root->left)
+          {
+              TreeNode * node = root->left;
+              TreeNode * now = node;
+              while(node->right)
+                  node = node->right;
+              
+              node->right = root->right;
+              root->right = now;
+              root->left = NULL;
+              
+          }
+          root = root->right;
+      }
     }
     
-    void find(TreeNode * root)
-    {
-        if(!root) return ;
-        TreeNode *node = root->right;
-        if(prev)
-        {
-            prev->left = NULL;
-            prev->right = root;
-        }
-        prev = root;
-        find(root->left);
-        find(node);
-    }
+   
 };
