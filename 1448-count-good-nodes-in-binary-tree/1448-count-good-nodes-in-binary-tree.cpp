@@ -11,18 +11,11 @@
  */
 class Solution {
 public:
-    int cnt =0;
-    int goodNodes(TreeNode* root) {
-        find(root, root->val);
-        return cnt;
-    }
-    
-    int find(TreeNode * root, int val)
-    {
+    int goodNodes(TreeNode* root, int prnt =INT_MIN) {
         if(!root) return 0;
-        if(root->val>=val) cnt++;
-        find(root->left, max(root->val,val));
-        find(root->right, max(root->val,val));
-        return 0;
+        
+        return  (root->val>=prnt?1:0) +
+                goodNodes(root->left, max(root->val, prnt)) + 
+                goodNodes(root->right, max(root->val, prnt)) ;
     }
 };
