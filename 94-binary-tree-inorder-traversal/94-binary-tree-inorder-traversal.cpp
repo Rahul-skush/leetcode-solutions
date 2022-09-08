@@ -11,17 +11,31 @@
  */
 class Solution {
     private: vector<int> res;
+             stack<TreeNode *> st;
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        find(root);
+        if(!root) return {};
+        st.push(root);
+        nextLeft(root);
+        while(!st.empty())
+        {
+            TreeNode* p = st.top(); st.pop();
+            res.push_back(p->val);
+            if(p->right){
+                st.push(p->right);
+                nextLeft(p->right);
+            }
+        }
         return res;
     }
     
-    private: void find(TreeNode *root)
+    private: void nextLeft(TreeNode *root)
     {
         if(!root) return;
-        find(root->left);
-        res.push_back(root->val);
-        find(root->right);
+        while(root->left)
+        {
+            root = root->left;
+            st.push(root);
+        }
     }
 };
