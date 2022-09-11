@@ -1,29 +1,23 @@
 class Solution {
 public:
     int maxPerformance(int n, vector<int>& speed, vector<int>& efficiency, int k) {
-        vector<vector<int>> v;
+       vector<vector<int>> v ;
         for(int i=0;i<n;i++)
-        {
             v.push_back({efficiency[i], speed[i]});
-        }
-        
-        sort(v.rbegin(), v.rend());
-        long long  ans = 0, sum =0;
-        int mod = 1e9+7;
-        
+        sort(v.begin(), v.end());
         priority_queue<int, vector<int>, greater<int>> pq;
-        for(int i=0;i<n;i++)
+        long long sum =0, ans =0;
+        for(int i=n-1;i>=0;i--)
         {
-            if(!pq.empty() && pq.size()>=k)
+             if(pq.size()>=k)
             {
-                int t = pq.top(); pq.pop();
-                sum -= t;
+                sum -= pq.top(); pq.pop();
             }
-            pq.push(v[i][1]);
             sum += v[i][1];
-            ans = max(ans, (sum*v[i][0]));
+            ans = max(ans, (long long)v[i][0]*sum);
+            pq.push(v[i][1]);
         }
-        
+        int mod = 1e9+7;
         return ans%mod;
     }
 };
