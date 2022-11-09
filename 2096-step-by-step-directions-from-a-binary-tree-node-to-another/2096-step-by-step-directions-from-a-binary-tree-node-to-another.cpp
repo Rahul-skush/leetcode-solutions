@@ -12,17 +12,18 @@
 class Solution {
 public:
     string getDirections(TreeNode* root, int startValue, int destValue) {
-        TreeNode *LCANode = findLCA(root, startValue, destValue);
         string str;
         string left;
-        findPath(LCANode, str, left,  startValue);
+        findPath(root, str, left,  startValue);
         string right;
         str = "";
-        findPath(LCANode, str, right, destValue);
+        findPath(root, str, right, destValue);
         string ans;
-        for(int i=0;i<left.size();i++)
-            ans += 'U';
-        ans += right;
+        int i=0;
+        while(i<left.size() && i<right.size() && left[i]==right[i]) i++;
+        int j = i;
+        while(i<left.size()) {ans += 'U'; i++;}
+        while(j<right.size()) ans += right[j++];
         return ans ;
     }
     
@@ -36,15 +37,5 @@ public:
         str += "R";
          findPath(root->right, str , ans, s);
         str.pop_back();
-    }
-    
-    TreeNode * findLCA(TreeNode * root, int s, int e)
-    {
-        if(!root) return NULL;
-        if(root->val==s || root->val==e) return root;
-        TreeNode *left = findLCA(root->left, s, e);
-        TreeNode *right = findLCA(root->right, s, e);
-        if(left && right) return root;
-        return left?left: right;
     }
 };
