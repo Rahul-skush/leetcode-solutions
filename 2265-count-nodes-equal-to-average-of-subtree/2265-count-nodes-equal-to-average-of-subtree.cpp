@@ -11,23 +11,24 @@
  */
 class Solution {
 public:
-    int cnt=0;
+    int cnt =0;
     int averageOfSubtree(TreeNode* root) {
         find(root);
         return cnt;
     }
     
-    vector<int> find(TreeNode * root)
+    pair<int, int>  find(TreeNode * root)
     {
         if(!root) return {0, 0};
         
+        pair<int, int> left = find(root->left);
+        pair<int, int> right = find(root->right);
         
-        vector<int> left = find(root->left);
-        vector<int> right = find(root->right);
-        int sum =  left[0] + right[0] + root->val;
-        
-        if(sum/(left[1] + right[1]+1)==root->val) cnt++;
-        
-        return {sum, left[1] + right[1] + 1};
+        int sum = left.first + right.first + root->val;
+        int n = left.second + right.second + 1;
+        int avg = sum/n;
+        if(avg == root->val)
+            cnt+=1;
+        return {sum, n};
     }
 };
