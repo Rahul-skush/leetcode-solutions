@@ -21,13 +21,13 @@ public:
     void find(TreeNode * root, map<int, int> &mp)
     {
         if(!root) return ;
+        mp[root->val]++;
+        
         if(!root->left && !root->right) {
-            mp[root->val]++;
             if(check(mp)) ans++;
             mp[root->val]--;
                    return ;
         }
-       mp[root->val]++;
         find(root->left, mp);
         find(root->right, mp);
        mp[root->val]--;
